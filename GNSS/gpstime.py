@@ -115,14 +115,14 @@ def mkUTC(year, month, day, hour, min, sec):
     # print('sec %s = %s' % (type(sec), sec))
     # print('spec %s' % spec)
 
-    print('spec = {!s}'.format(spec))
-    print('type(spec) = {!s}'.format(type(spec)))
-    print('time.mktime(spec) = {!s}'.format(time.mktime(spec)))
-    print('type(time.mktime(spec)) = {!s}'.format(type(time.mktime(spec))))
-    print('msec = {!s}'.format(msec))
-    print('type(msec) = {!s}'.format(type(msec)))
-    print('time.timezone = {!s}'.format(time.timezone))
-    print('type(time.timezone) = {!s}'.format(type(time.timezone)))
+    # print('spec = {!s}'.format(spec))
+    # print('type(spec) = {!s}'.format(type(spec)))
+    # print('time.mktime(spec) = {!s}'.format(time.mktime(spec)))
+    # print('type(time.mktime(spec)) = {!s}'.format(type(time.mktime(spec))))
+    # print('msec = {!s}'.format(msec))
+    # print('type(msec) = {!s}'.format(type(msec)))
+    # print('time.timezone = {!s}'.format(time.timezone))
+    # print('type(time.timezone) = {!s}'.format(type(time.timezone)))
 
     utc = time.mktime(spec) + msec - time.timezone
     return utc
