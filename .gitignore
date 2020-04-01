@@ -159,3 +159,6 @@ dmypy.json
 
 # subversion
 .svn
+
+# sublime
+*.sublime-workspace

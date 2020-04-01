@@ -250,7 +250,17 @@ def getTLEfromNORAD(TLEBaseName, verbose=False):
                         f.flush()
                         # f.flush() commented by recommendation from J.F.Sebastian
                         os.fsync(f)
-        except requests.exceptions.ConnectionError, requests.exceptions.ConnectTimeoutError:
+        except requests.exceptions.ConnectionError:
+            sys.stderr.write('Connection to NORAD could not be established.\n')
+
+            # check if we have alocal TLE file
+            if os.path.isfile(TLEFileNames[-1]):
+                print('Using local file %s' % TLEFileNames[-1])
+                return TLEFileNames[-1]
+            else:
+                sys.stderr.write('Program exits.\n')
+                sys.exit(E_REQUEST_ERROR)
+        except requests.exceptions.ConnectTimeoutError:
             sys.stderr.write('Connection to NORAD could not be established.\n')
 
             # check if we have alocal TLE file
@@ -955,7 +965,7 @@ def plotDOPVisSats(systSat, observer, listSats, predDates, elev, xDOPs, cutoff, 
     # print('labels = %s' % labels)
     for i in range(0, 3):
         xDOP = xDOPs[:, i]
-        dopColor = colors.next()
+        dopColor = next(colors)
         transparency = .5 - i * 0.1
         ax1.fill_between(predDates, 0, xDOP, color=dopColor, alpha=transparency)
         ax1.plot(predDates, xDOP, linewidth=2, color=dopColor, label=labels[i])
@@ -964,7 +974,7 @@ def plotDOPVisSats(systSat, observer, listSats, predDates, elev, xDOPs, cutoff, 
         if i is 1:
             PDOP2 = xDOPs[:, 0] * xDOPs[:, 0] + xDOPs[:, 1] * xDOPs[:, 1]
             # print('PDOP = %s' % np.sqrt(PDOP2))
-            dopColor = colors.next()
+            dopColor = next(colors)
             transparency = .2
             ax1.fill_between(predDates, 0, np.sqrt(PDOP2), color=dopColor, alpha=transparency)
             ax1.plot(predDates, np.sqrt(PDOP2), linewidth=2, color=dopColor, label='PDOP')
@@ -973,7 +983,7 @@ def plotDOPVisSats(systSat, observer, listSats, predDates, elev, xDOPs, cutoff, 
         if i is 2:
             GDOP = np.sqrt(PDOP2 + xDOPs[:, 2] * xDOPs[:, 2])
             # print('GDOP = %s' % GDOP)
-            dopColor = colors.next()
+            dopColor = next(colors)
             transparency = .1
             ax1.fill_between(predDates, 0, GDOP, color=dopColor, alpha=transparency)
             ax1.plot(predDates, GDOP, linewidth=2, color=dopColor, label='GDOP')
