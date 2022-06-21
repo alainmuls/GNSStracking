@@ -6,7 +6,7 @@ ephem==3.7.7.1
 idna==2.9
 kiwisolver==1.1.0
 matplotlib==3.2.1
-numpy==1.18.2
+numpy==1.22.0
 OWSLib==0.19.2
 Pillow>=7.1.0
 pkg-resources==0.0.0
