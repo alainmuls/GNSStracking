@@ -1,5 +1,5 @@
 basemap==1.2.1
-certifi==2019.11.28
+certifi==2022.12.7
 chardet==3.0.4
 cycler==0.10.0
 ephem==3.7.7.1
